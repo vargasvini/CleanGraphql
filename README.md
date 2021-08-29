@@ -1,1 +1,1 @@
-# CleanGraphql
+# Clean-Graphql
