@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using RendaSolidaria.API.GraphQL;
+using RendaSolidaria.API.GraphQL.UserExtensions;
 using RendaSolidaria.Infra.IoC;
 
 namespace RendaSolidaria.API
@@ -29,6 +31,15 @@ namespace RendaSolidaria.API
             //    .AddNewtonsoftJson(options =>
             //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             //);
+
+            services.AddGraphQLServer()
+            .AddQueryType<Query>()
+            .AddMutationType<Mutation>()
+            .AddTypeExtension<UserQueries>()
+            .AddTypeExtension<UserMutations>()
+            .AddFiltering()
+            .AddSorting();
+
             services.AddInfrastructureAPI(Configuration);    
         }
 

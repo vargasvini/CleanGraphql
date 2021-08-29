@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RendaSolidaria.Core.Domain
+namespace RendaSolidaria.Infra.Data.Repository
 {
     public interface IUserRepository
     {

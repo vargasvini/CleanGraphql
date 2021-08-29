@@ -3,10 +3,6 @@ using Microsoft.Extensions.Configuration;
 using RendaSolidaria.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using RendaSolidaria.Infra.Data.Repository;
-using RendaSolidaria.Infra.Data;
-using RendaSolidaria.Core.Domain;
-using RendaSolidaria.Infra.Data.GraphQL;
-using RendaSolidaria.Infra.Data.GraphQL.UserExtensions;
 
 namespace RendaSolidaria.Infra.IoC
 {
@@ -21,13 +17,6 @@ namespace RendaSolidaria.Infra.IoC
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddTransient<MainContext>();
-            services.AddGraphQLServer()
-            .AddQueryType<Query>()
-            .AddMutationType<Mutation>()
-            .AddTypeExtension<UserQueries>()
-            .AddTypeExtension<UserMutations>()
-            .AddFiltering()
-            .AddSorting();
 
             return services;
         }

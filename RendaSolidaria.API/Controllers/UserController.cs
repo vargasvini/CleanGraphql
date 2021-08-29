@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RendaSolidaria.Core.Domain;
+using RendaSolidaria.Infra.Data.Repository;
 using System;
 using System.Threading.Tasks;
 
