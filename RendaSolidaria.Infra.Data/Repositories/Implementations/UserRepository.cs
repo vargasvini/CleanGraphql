@@ -1,15 +1,26 @@
 ﻿using HotChocolate;
+using Microsoft.EntityFrameworkCore;
+using RendaSolidaria.Core.Domain;
 using RendaSolidaria.Core.Domain.Schemas;
 using RendaSolidaria.Infra.Data.Context;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RendaSolidaria.Infra.Data.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public IQueryable<User> GetUser([ScopedService] MainContext context)
+        private readonly MainContext _context;
+
+        public UserRepository(MainContext context)
         {
-            return context.Users;
+            _context = context;
+        }
+
+        public async Task<IEnumerable<User>> GetUsersAsync()
+        {
+            return await _context.Users.ToListAsync();
         }
     }
 }
