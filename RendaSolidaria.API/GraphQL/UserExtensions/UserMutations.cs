@@ -3,6 +3,7 @@ using HotChocolate.Data;
 using HotChocolate.Types;
 using RendaSolidaria.Core.Domain.Schemas;
 using RendaSolidaria.Infra.Data.Context;
+using System;
 using System.Threading.Tasks;
 
 namespace RendaSolidaria.API.GraphQL.UserExtensions
@@ -20,9 +21,35 @@ namespace RendaSolidaria.API.GraphQL.UserExtensions
                 await context.SaveChangesAsync();
                 return new AddUserPayload(user);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 var userpl = new AddUserPayload(null);
+                userpl.IsSuccess = false;
+                userpl.ErrorMessage = ex.Message;
+                return userpl;
+            }
+        }
+
+        [UseDbContext(typeof(MainContext))]
+        public async Task<UpdateUserPayload> UpdateUser(UpdateUserInput input, [ScopedService] MainContext context)
+        {
+            try
+            {
+                var user= await context.Users.FindAsync(input.id);
+                if(user == null)
+                {
+                    throw new Exception("User not found");
+                }
+
+                user.Update(input.name);
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+
+                return new UpdateUserPayload(user);
+            }
+            catch (Exception ex)
+            {
+                var userpl = new UpdateUserPayload(null);
                 userpl.IsSuccess = false;
                 userpl.ErrorMessage = ex.Message;
                 return userpl;

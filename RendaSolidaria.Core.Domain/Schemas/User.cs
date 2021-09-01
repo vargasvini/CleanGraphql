@@ -1,8 +1,9 @@
 ﻿using RendaSolidaria.Core.Domain.Validation;
+using System;
 
 namespace RendaSolidaria.Core.Domain.Schemas
 {
-    public class User
+    public class User : SchemaBase
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,6 +13,15 @@ namespace RendaSolidaria.Core.Domain.Schemas
             if (IsValidDomain(name))
             {
                 Name = name;
+            }
+        }
+
+        public void Update(string name)
+        {
+            if (IsValidDomain(name))
+            {
+                Name = name;
+                base.UpdatedAt = DateTime.Now;
             }
         }
 
