@@ -1,6 +1,22 @@
 version: '3'
 
 services:
+  rendasolidaria.api:
+    image: rendasolidariaapi:latest
+    container_name: rendasolidaria_backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - "8080:80"
+      - "8081:443"
+    environment: 
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: "8081"
+      ASPNETCORE_ENVIRONMENT: "Development"
+    volumes: 
+      - ${APPDATA}\microsoft\UserSecrets\:/root/.microsoft/usersecrets
+      - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
   postgres:
     image: postgres:latest
     container_name: postgresdb

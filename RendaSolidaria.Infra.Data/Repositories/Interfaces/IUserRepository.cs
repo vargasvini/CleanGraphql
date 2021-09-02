@@ -8,6 +8,9 @@ namespace RendaSolidaria.Infra.Data.Repository
 {
     public interface IUserRepository
     {
-        public IQueryable<User> GetUsers(MainContext context);
+        IQueryable<User> GetUsers(MainContext context);
+        Task<User> GetUserByIdAsync(MainContext context, int id);
+        Task AddUserAsync(MainContext context, User user);
+        Task UpdateUserAsync(MainContext context, User user);
     }
 }

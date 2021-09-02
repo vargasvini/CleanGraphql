@@ -3,6 +3,7 @@ using HotChocolate.Data;
 using HotChocolate.Types;
 using RendaSolidaria.Core.Domain.Schemas;
 using RendaSolidaria.Infra.Data.Context;
+using RendaSolidaria.Infra.Data.Repository;
 using System;
 using System.Threading.Tasks;
 
@@ -12,13 +13,12 @@ namespace RendaSolidaria.API.GraphQL.UserExtensions
     public class UserMutations
     {
         [UseDbContext(typeof(MainContext))]
-        public async Task<AddUserPayload> AddUser(AddUserInput input, [ScopedService] MainContext context)
+        public async Task<AddUserPayload> AddUser(AddUserInput input, [ScopedService] MainContext context, [Service] IUserRepository userRepository)
         {
             try
             {
                 var user = new User(input.name);
-                context.Users.Add(user);
-                await context.SaveChangesAsync();
+                await userRepository.AddUserAsync(context, user);
                 return new AddUserPayload(user);
             }
             catch (Exception ex)
@@ -31,20 +31,18 @@ namespace RendaSolidaria.API.GraphQL.UserExtensions
         }
 
         [UseDbContext(typeof(MainContext))]
-        public async Task<UpdateUserPayload> UpdateUser(UpdateUserInput input, [ScopedService] MainContext context)
+        public async Task<UpdateUserPayload> UpdateUser(UpdateUserInput input, [ScopedService] MainContext context, [Service] IUserRepository userRepository)
         {
             try
             {
-                var user= await context.Users.FindAsync(input.id);
+                var user= await userRepository.GetUserByIdAsync(context, input.id);
                 if(user == null)
                 {
                     throw new Exception("User not found");
                 }
 
                 user.Update(input.name);
-                context.Users.Update(user);
-                await context.SaveChangesAsync();
-
+                await userRepository.UpdateUserAsync(context, user);
                 return new UpdateUserPayload(user);
             }
             catch (Exception ex)

@@ -16,7 +16,7 @@ namespace RendaSolidaria.API.GraphQL.UserExtensions
         [UseDbContext(typeof(MainContext))]
         [UseFiltering]
         [UseSorting]
-        [Authorize]
+        //[Authorize]
         public IQueryable<User> GetUser([ScopedService] MainContext context, [Service] IUserRepository userRepository)
         {
             return userRepository.GetUsers(context);

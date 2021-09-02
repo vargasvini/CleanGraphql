@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendaSolidaria.API", "RendaSolidaria.API\RendaSolidaria.API.csproj", "{011A4ACE-51A9-476B-9AEF-5ECA30EB1D1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaSolidaria.API", "RendaSolidaria.API\RendaSolidaria.API.csproj", "{011A4ACE-51A9-476B-9AEF-5ECA30EB1D1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendaSolidaria.Infra.Data", "RendaSolidaria.Infra.Data\RendaSolidaria.Infra.Data.csproj", "{34C700D4-86E1-407C-9728-6EEDA127C9A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaSolidaria.Infra.Data", "RendaSolidaria.Infra.Data\RendaSolidaria.Infra.Data.csproj", "{34C700D4-86E1-407C-9728-6EEDA127C9A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendaSolidaria.Infra.IoC", "RendaSolidaria.Infra.IoC\RendaSolidaria.Infra.IoC.csproj", "{FCE0F4C6-EE4C-4334-B567-24533E131D39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaSolidaria.Infra.IoC", "RendaSolidaria.Infra.IoC\RendaSolidaria.Infra.IoC.csproj", "{FCE0F4C6-EE4C-4334-B567-24533E131D39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendaSolidaria.Core.Domain", "RendaSolidaria.Core.Domain\RendaSolidaria.Core.Domain.csproj", "{6DE65B73-BAC8-4885-BAD6-246FCE72E68C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RendaSolidaria.Core.Domain", "RendaSolidaria.Core.Domain\RendaSolidaria.Core.Domain.csproj", "{6DE65B73-BAC8-4885-BAD6-246FCE72E68C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RendaSolidaria.Core.Domain.Tests", "RendaSolidaria.Core.Domain.Tests\RendaSolidaria.Core.Domain.Tests.csproj", "{9CF024B5-53EE-4222-8703-3AD875398EBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6DE65B73-BAC8-4885-BAD6-246FCE72E68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DE65B73-BAC8-4885-BAD6-246FCE72E68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DE65B73-BAC8-4885-BAD6-246FCE72E68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF024B5-53EE-4222-8703-3AD875398EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF024B5-53EE-4222-8703-3AD875398EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF024B5-53EE-4222-8703-3AD875398EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF024B5-53EE-4222-8703-3AD875398EBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
