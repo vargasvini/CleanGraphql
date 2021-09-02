@@ -10,6 +10,8 @@ namespace RendaSolidaria.Infra.IoC
     {
         public static IServiceCollection AddInfrastructureAPI(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddControllers();
+
             services.AddPooledDbContextFactory<MainContext>(opt =>
                 opt.UseNpgsql(configuration.GetConnectionString("PostgresConnStrD"),
                 x => x.MigrationsAssembly(typeof(MainContext).Assembly.FullName))

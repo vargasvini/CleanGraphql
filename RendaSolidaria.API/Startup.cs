@@ -1,4 +1,6 @@
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,7 @@ namespace RendaSolidaria.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructureAPI(Configuration);
+            services.AddInfrastructureHealthChecks(Configuration);
             services.AddInfrastructureJWT(Configuration);
             services.AddInfrastructureSwagger();
 
@@ -34,12 +37,6 @@ namespace RendaSolidaria.API
             .AddTypeExtension<UserMutations>()
             .AddFiltering()
             .AddSorting();
-
-            services.AddControllers();
-            //services.AddControllersWithViews()
-            //    .AddNewtonsoftJson(options =>
-            //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-            //);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +49,18 @@ namespace RendaSolidaria.API
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RendaSolidaria.API v1"));
+
+            app.UseHealthChecks("/healthchecks", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
+
+            app.UseHealthChecksUI(opt =>
+            {
+                opt.UIPath = "/healthchecks-ui";
+                opt.ApiPath = "/healthchecks-ui-api";
+            });
 
             app.UseHttpsRedirection();
 
